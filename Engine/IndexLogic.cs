@@ -60,13 +60,32 @@ namespace Game.Engine
         // produce random monster factory
         public static MonsterFactory RandomMonsterFactory()
         {
-            return monsterFactories[RNG(0, monsterFactories.Count)].Clone();
+            return MonsterFactories[RNG(0, MonsterFactories.Count)].Clone();
         }
 
         // produce an interaction or a group of interactions
         public static List<Interaction> DrawInteractions(GameSession parentSession)
         {
-            return interactionFactories[RNG(0, interactionFactories.Count)].CreateInteractionsGroup(parentSession);
+            return InteractionFactories[RNG(0, InteractionFactories.Count)].CreateInteractionsGroup(parentSession);
+        }
+
+        // returns an interaction (no quest limitations) from the factory based on the specified number 
+        // example: number=4 will return "interaction0004" if it exists (or ShopInteraction by default)
+        public static Interaction GetInteractionByNumber(GameSession parentSession, int number)
+        {
+            int interNumber;
+            foreach (Interaction inter in Interactions)
+            {
+                int.TryParse(inter.Name.Substring(11), out interNumber);
+                if (interNumber == number) return inter;
+            }
+            return new ShopInteraction(parentSession);
+        }
+
+        // for MetaMapMatrix
+        public static int NumberOfMonsters()
+        {
+            return MonsterFactories.Count;
         }
 
     }

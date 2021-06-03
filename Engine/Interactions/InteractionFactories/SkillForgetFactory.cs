@@ -11,7 +11,9 @@ namespace Game.Engine.Interactions.InteractionFactories
     {
         public List<Interaction> CreateInteractionsGroup(GameSession ses)
         {
-            return new List<Interaction>() { new SkillForgetInteraction(ses) };
+            var ans = new SkillForgetInteraction(ses);
+            Index.Interactions.Add(ans);
+            return new List<Interaction>() { ans };
         }
     }
 }

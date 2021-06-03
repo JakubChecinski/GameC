@@ -261,10 +261,6 @@ namespace Game.Engine
         {
             scene.EndDisplay();
         }
-        public void DestroyInteraction(Interaction interaction)
-        {
-            // for permanently removing interactions
-        }
         public void RefreshMonstersDisplay()
         {
             // refresh display of all monsters
@@ -301,7 +297,7 @@ namespace Game.Engine
              */
             if (code > 1) parentPage.IgnoreNextKey = true;
             //
-            if (code == 1000)
+            if (code >= 1000 && code < 2000)
             {
                 try
                 {

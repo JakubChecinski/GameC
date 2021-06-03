@@ -18,6 +18,8 @@ namespace Game.Engine.Interactions.InteractionFactories
                 i++;
                 HymirEncounter hymir = new HymirEncounter(parentSession);
                 GymirEncounter gymir = new GymirEncounter(parentSession, hymir);
+                Index.Interactions.Add(hymir);
+                Index.Interactions.Add(gymir);
                 return new List<Interaction>() { hymir, gymir };
             }
             else return new List<Interaction>();

@@ -153,7 +153,7 @@ namespace Game.Engine
                     {
                         parentPage.AddPortal(i, j);
                     }
-                    else if (mapMatrix.Matrix[j, i] == 1000)
+                    else if (mapMatrix.Matrix[j, i] >= 1000 && mapMatrix.Matrix[j, i] < 2000)
                     {
                         parentPage.AddMonster(j * mapMatrix.Width + i, mapMatrix.HintMonsterImage(i, j), mapMatrix.Width);
                     }

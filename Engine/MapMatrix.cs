@@ -5,6 +5,9 @@ using Game.Engine.Monsters;
 using System.Windows;
 using Game.Engine.Interactions;
 using System.Windows.Controls;
+using System.Text.RegularExpressions;
+using System.IO;
+using Game.Engine.Interactions.InteractionFactories;
 
 namespace Game.Engine
 {
@@ -16,13 +19,14 @@ namespace Game.Engine
     // 2000 to 2999 - portal to another map
     // 3000 and above - a custom interaction
     // -1 to -999 - unpassable terrain (just like 0 but with nicer display)
-    
+
     [Serializable]
     class MapMatrix
     {
         // map parameters
         private int monsters;
         private int walls;
+
 
         // other fields and properties
         private Random rng;
@@ -31,10 +35,57 @@ namespace Game.Engine
         public Dictionary<int, MonsterFactory> MonDict; // key - position number on board, value - monster factory located there
         public Dictionary<int, Monster> MemorizedMonsters { get; set; } // for keeping exactly the same monster between battles 
         public Dictionary<int, Interaction> Interactions { get; private set; } // same as MonDict, but for interactions
+
         public int[,] Matrix { get; set; } // matrix with all board positions 
         public int Width { get; protected set; } = 25;
         public int Height { get; protected set; } = 20;
+        public MapMatrix(GameSession parent, string Path)
+        {
+            parentSession = parent;
+            Matrix = new int[Height, Width];
+            List<string> positionList = new List<string>();
+            List<int> finalList = new List<int>();
 
+            Regex reg = new Regex("\t");
+            foreach (string pos in File.ReadAllLines(Path))
+            {
+                positionList.Add(pos);
+            }
+            foreach (string pos in positionList)
+            {
+                string[] elements = reg.Split(pos);
+                List<string> elementList = new List<string>();
+                foreach (string element in elements)
+                {
+                    elementList.Add(element);
+                }
+                foreach (string el in elementList)
+                {
+                    finalList.Add(Int32.Parse(el));
+                }
+            }
+            MemorizedMonsters = new Dictionary<int, Monster>();
+            Interactions = new Dictionary<int, Interaction>();
+            MonDict = new Dictionary<int, MonsterFactory>();
+            int index = 0;
+            for (int y = 1; y < Height - 1; y++)
+            {
+                for (int x = 1; x < Width; x++)
+                {
+                    Matrix[y, x] = finalList[index];
+                    if (finalList[index] > 1000 && finalList[index] < 2000)
+                    {
+                        MonDict.Add(y * Width + x, Index.MonsterFactories[Matrix[y, x] - 1001]);
+                    }
+                    else if (finalList[index] > 3000)
+                    {
+                        Interactions.Add(y * Width + x, Index.GetInteractionByNumber(parentSession, finalList[index] - 3000));
+                    }
+                    index++;
+                }
+            }
+
+        }
         public MapMatrix(GameSession parent, List<int> portals, List<Interaction> inters, int randomCode, (int, int) mapParams)
         {
             parentSession = parent;
@@ -51,6 +102,7 @@ namespace Game.Engine
                 }
             }
             // decorate map with stuff
+
             DecorateWithObstacles();
             DecorateWithPortals(portals);
             DecorateWithInteractions(inters);
@@ -61,17 +113,17 @@ namespace Game.Engine
             for (int y = 0; y < Height; y++) Matrix[y, Width - 1] = 0;
             for (int x = 0; x < Width; x++) Matrix[Height - 1, x] = 0;
             // initialize 
-            InitializeFactoryList();
+            InitializeRandomFactoryList();
             MemorizedMonsters = new Dictionary<int, Monster>();
         }
 
         // fill map with monster factories
-        private void InitializeFactoryList()
+        private void InitializeRandomFactoryList()
         {
             MonDict = new Dictionary<int, MonsterFactory>();
             for (int y = 0; y < Height; y++)
             {
-                for (int x = 0; x < Width; x++) 
+                for (int x = 0; x < Width; x++)
                 {
                     if (Matrix[y, x] == 1000)
                     {
@@ -104,73 +156,81 @@ namespace Game.Engine
         // decorate map with stuff
         private void DecorateWithObstacles()
         {
-            // for cleaner code
+            List<(int, int)> BlockCoordinates = new List<(int, int)>();
+            List<BlockStructure> BlockList = new List<BlockStructure>();
+
+            //adding randomly-sized blocks and specific coordinates, placing structures in the given places
+            //for more info, go to BlockStructure.cs
+            for (int i = 0; i < 15; i++)
+            {
+                BlockList.Add(new BlockStructure(rng.Next(3, 6), rng.Next(3, 6)));
+            }
+            //1st row
+            BlockCoordinates.Add((2, 2));
+            BlockCoordinates.Add((2, 7));
+            BlockCoordinates.Add((2, 11));
+            BlockCoordinates.Add((2, 15));
+            BlockCoordinates.Add((2, 19));
+            //2nd row
+            BlockCoordinates.Add((7, 2));
+            BlockCoordinates.Add((7, 7));
+            BlockCoordinates.Add((7, 11));
+            BlockCoordinates.Add((7, 15));
+            BlockCoordinates.Add((7, 19));
+            //3rd row
+            BlockCoordinates.Add((14, 2));
+            BlockCoordinates.Add((14, 7));
+            BlockCoordinates.Add((14, 11));
+            BlockCoordinates.Add((14, 15));
+            BlockCoordinates.Add((14, 19));
+
+            for (int i = 0; i < BlockList.Count; i++)
+            {
+                BlockList[i].LoadStructure(Matrix, BlockCoordinates[i].Item1, BlockCoordinates[i].Item2);
+            }
+
+            // making wertical and/or horizontal edges 
+            int W = 0;
+            //int W = rng.Next(0, 3);       // can be used to produce semi-open maps
             int y0 = 1;
             int ym = Height - 2;
             int x0 = 1;
             int xm = Width - 2;
-            // external walls
-            for (int y = y0; y < ym; y++)
+
+            for (int y = y0; y <= ym; y++)
             {
-                Matrix[y, x0] = -1;
-                Matrix[y, xm] = -1;
-            }
-            for (int x = x0; x <= xm; x++) // = is for edges
-            {
-                Matrix[y0, x] = -1;
-                Matrix[ym, x] = -1;
-            }
-            // internal walls
-            for (int i = 0; i < walls; i++)
-            {
-                int start, length;
-                switch (rng.Next(4))
+                if (W != 2)
                 {
-                    case 0:
-                        start = rng.Next(xm - x0 - 1);
-                        length = rng.Next(1, Width / 2 - 2);
-                        for (int l = 0; l < length; l++)
-                        {
-                            Matrix[y0 + l, start] = -1;
-                        }
-                        break;
-                    case 1:
-                        start = rng.Next(xm - x0 - 1);
-                        length = rng.Next(1, Width / 2 - 2);
-                        for (int l = 0; l < length; l++)
-                        {
-                            Matrix[ym - l, start] = -1;
-                        }
-                        break;
-                    case 2:
-                        start = rng.Next(ym - y0 - 1);
-                        length = rng.Next(1, Height / 2 - 2);
-                        for (int l = 0; l < length; l++)
-                        {
-                            Matrix[start, x0 + l] = -1;
-                        }
-                        break;
-                    case 3:
-                        start = rng.Next(ym - y0 - 1);
-                        length = rng.Next(1, Height / 2 - 2);
-                        for (int l = 0; l < length; l++)
-                        {
-                            Matrix[start, xm - l] = -1;
-                        }
-                        break;
+                    Matrix[y, x0] = -1;
+                    Matrix[y, xm] = -1;
                 }
             }
-            // keep passages open
-            for (int x = x0 + 2; x < xm - 2; x++)
+            for (int x = x0; x <= xm; x++)
             {
-                for (int y = y0 + 2; y < ym - 2; y++)
+                if (W != 1)
                 {
-                    if (Matrix[y - 1, x] == -1 && Matrix[y, x - 1] == -1) { Matrix[y - 1, x] = 1; Matrix[y, x - 1] = 1; }
-                    if (Matrix[y + 1, x] == -1 && Matrix[y, x - 1] == -1) { Matrix[y + 1, x] = 1; Matrix[y, x - 1] = 1; }
-                    if (Matrix[y - 1, x] == -1 && Matrix[y, x + 1] == -1) { Matrix[y - 1, x] = 1; Matrix[y, x + 1] = 1; }
-                    if (Matrix[y + 1, x] == -1 && Matrix[y, x + 1] == -1) { Matrix[y + 1, x] = 1; Matrix[y, x + 1] = 1; }
+                    Matrix[y0, x] = -1;
+                    Matrix[ym, x] = -1;
                 }
             }
+            //making passages through map 
+            for (int y = y0 + 1; y < ym; y++)
+            {
+                Matrix[y, 2] = 1;
+                Matrix[y, 8] = 1;
+                Matrix[y, 12] = 1;
+                Matrix[y, 16] = 1;
+                Matrix[y, 20] = 1;
+                Matrix[y, 24] = 1;
+            }
+            for (int x = x0 + 1; x < xm; x++)
+            {
+                Matrix[2, x] = 1;
+                Matrix[6, x] = 1;
+                Matrix[13, x] = 1;
+                Matrix[17, x] = 1;
+            }
+
         }
         private void DecorateWithPortals(List<int> portals)
         {
@@ -199,7 +259,7 @@ namespace Game.Engine
                 {
                     int x = rng.Next(2, Width - 2);
                     int y = rng.Next(2, Height - 2);
-                    if (ValidPlace(x, y) && Matrix[y, x] == 1) 
+                    if (ValidPlace(x, y) && Matrix[y, x] == 1)
                     {
                         if (Interactions.ContainsKey(Width * y + x)) continue;
                         Interactions.Add(Width * y + x, inter);
@@ -214,7 +274,7 @@ namespace Game.Engine
             Random rng = new Random();
             for (int i = 0; i < monsters; i++)
             {
-                int x = rng.Next(2, Width - 2); 
+                int x = rng.Next(2, Width - 2);
                 int y = rng.Next(2, Height - 2);
                 if (Matrix[y, x] != 1)
                 {
@@ -224,7 +284,6 @@ namespace Game.Engine
                 Matrix[y, x] = 1000;
             }
         }
-        
         public bool ValidPlace(int x, int y)
         {
             // utility

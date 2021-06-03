@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Engine\BlockStructure.cs" />
     <Compile Include="Engine\DmgType.cs" />
     <Compile Include="Engine\Interactions\GymirHymir\GymirNoMoneyState.cs" />
     <Compile Include="Engine\Interactions\GymirHymir\GymirState.cs" />
@@ -306,6 +307,8 @@
     <Resource Include="Display\Assets\Interactions\interaction0005.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Maps\MetaMap.txt" />
+    <Resource Include="Maps\MyMap.txt" />
     <Content Include="Sound\Assets\item_axe.mp3" />
     <Content Include="Sound\Assets\item_spear.mp3" />
     <Content Include="Sound\Assets\item_staff.mp3" />

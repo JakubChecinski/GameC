@@ -1,0 +1,7 @@
+portals=1	shops=1	interactions=7	monsters=6	walls=20
+portal=1	portal=2	interactionFactory=1	monster=2	monster=3	mainquest=1	sidequest=1.1
+randommonsters=true	randominteractions=false	randomportals=false	mainquest=2	interaction=2	interaction=2	
+randomportals=true	randommonsters=true	sidequest=1.2
+randomportals=true	randommonsters=true	randominteractions=true	//to jest komentarz
+file=MyMap.txt	portal=0
+randomportals=true	randommonsters=true	randominteractions=true

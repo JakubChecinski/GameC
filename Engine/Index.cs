@@ -6,6 +6,7 @@ using Game.Engine.Items;
 using Game.Engine.Items.ItemFactories;
 using Game.Engine.Items.BasicArmor;
 using Game.Engine.Interactions.InteractionFactories;
+using Game.Engine.Interactions;
 
 
 namespace Game.Engine
@@ -37,29 +38,28 @@ namespace Game.Engine
             new BasicArmorFactory(),
         };
 
-        private static List<MonsterFactory> monsterFactories = new List<MonsterFactory>()
+        public readonly static List<MonsterFactory> MonsterFactories = new List<MonsterFactory>()
         {
-            // x4
-            new Monsters.MonsterFactories.RatFactory(),
-            new Monsters.MonsterFactories.RatFactory(),
-            new Monsters.MonsterFactories.RatFactory(),
             new Monsters.MonsterFactories.RatFactory(),
             new Monsters.MonsterFactories.BatFactory(),
-            new Monsters.MonsterFactories.BatFactory(),
-            new Monsters.MonsterFactories.BatFactory(),
-            new Monsters.MonsterFactories.BatFactory(),
             new Monsters.MonsterFactories.SpiderFactory(),
-            new Monsters.MonsterFactories.SpiderFactory(),
-            new Monsters.MonsterFactories.SpiderFactory(),
-            new Monsters.MonsterFactories.SpiderFactory(),
+        };
+
+        public readonly static List<InteractionFactory> InteractionFactories = new List<InteractionFactory>()
+        {
+            new SkillForgetFactory(),
+            new HealInteractionFactory(),
         };
 
         public readonly static InteractionFactory MainQuestFactory = new GymirHymirFactory();
 
-        private static List<InteractionFactory> interactionFactories = new List<InteractionFactory>()
+        public readonly static List<InteractionFactory> SideQuestFactory = new List<InteractionFactory>()
         {
-            new SkillForgetFactory(),
-            new HealInteractionFactory(),
+            new GymirHymirFactory()
+        };
+
+        public static List<Interaction> Interactions = new List<Interaction>()
+        {
         };
 
     }

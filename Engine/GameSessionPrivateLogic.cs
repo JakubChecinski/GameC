@@ -28,22 +28,30 @@ namespace Game.Engine
         }
         public void Wait(int milliseconds)
         {
-            // wait a specific amount of time (e.g. for a keyboard response from the user)
-            // for most practical purposes it will be used with a small argument value in a loop
-            if (milliseconds == 0 || milliseconds < 0) return;
-            timer.Interval = milliseconds;
-            timer.Enabled = true;
-            timer.Start();
-            timer.Tick += (s, e) =>
+            try
             {
-                timer.Enabled = false;
-                timer.Stop();
-            };
-            while (timer.Enabled)
-            {
-                // do not freeze the rest of application
-                if(Application.Current != null) Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+                // wait a specific amount of time (e.g. for a keyboard response from the user)
+                // for most practical purposes it will be used with a small argument value in a loop
+                if (milliseconds == 0 || milliseconds < 0) return;
+                timer.Interval = milliseconds;
+                timer.Enabled = true;
+                timer.Start();
+                timer.Tick += (s, e) =>
+                {
+                    timer.Enabled = false;
+                    timer.Stop();
+                };
+                while (timer.Enabled)
+                {
+                    // do not freeze the rest of application
+                    if (Application.Current != null) Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+                }
             }
+            catch(Exception e)
+            {
+                SendColorText("Unknown exception happened inside Wait method: " + e.Message, "red");
+            }
+            
         }
         public void RemoveItemPosition(int x, int y)
         {

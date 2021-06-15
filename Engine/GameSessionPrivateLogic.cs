@@ -208,31 +208,31 @@ namespace Game.Engine
         public void RefreshStats()
         {
             // refresh active item buffs to statstics
-            currentPlayer.ResetBuffs();
+            CurrentPlayer.ResetBuffs();
             List<string> itemNames = GetActiveItemNames();
             foreach (string itemName in itemNames)
             {
                 List<string> tmp = new List<string>(itemNames);
                 tmp.Remove(itemName); // all active items except this one
-                Index.ProduceSpecificItem(itemName).ApplyBuffs(currentPlayer, tmp);
+                Index.ProduceSpecificItem(itemName).ApplyBuffs(CurrentPlayer, tmp);
             }
             // refresh statistics display
             parentPage.Stat1.Document.Blocks.Clear();
-            parentPage.Stat1.AppendText("Zdrowie: " + currentPlayer.Health);
+            parentPage.Stat1.AppendText("Zdrowie: " + CurrentPlayer.Health);
             parentPage.Stat2.Document.Blocks.Clear();
-            parentPage.Stat2.AppendText("Sila: " + currentPlayer.Strength);
+            parentPage.Stat2.AppendText("Sila: " + CurrentPlayer.Strength);
             parentPage.Stat3.Document.Blocks.Clear();
-            parentPage.Stat3.AppendText("Pancerz: " + currentPlayer.Armor);
+            parentPage.Stat3.AppendText("Pancerz: " + CurrentPlayer.Armor);
             parentPage.Stat4.Document.Blocks.Clear();
-            parentPage.Stat4.AppendText("Precyzja: " + currentPlayer.Precision);
+            parentPage.Stat4.AppendText("Precyzja: " + CurrentPlayer.Precision);
             parentPage.Stat5.Document.Blocks.Clear();
-            parentPage.Stat5.AppendText("Moc: " + currentPlayer.MagicPower);
+            parentPage.Stat5.AppendText("Moc: " + CurrentPlayer.MagicPower);
             parentPage.Stat6.Document.Blocks.Clear();
-            parentPage.Stat6.AppendText("Energia: " + currentPlayer.Stamina);
+            parentPage.Stat6.AppendText("Energia: " + CurrentPlayer.Stamina);
             parentPage.StatLevel.Document.Blocks.Clear();
-            parentPage.StatLevel.AppendText(" Poziom " + currentPlayer.Level);
+            parentPage.StatLevel.AppendText(" Poziom " + CurrentPlayer.Level);
             parentPage.StatGold.Document.Blocks.Clear();
-            parentPage.StatGold.AppendText("Zloto: " + currentPlayer.Gold);
+            parentPage.StatGold.AppendText("Zloto: " + CurrentPlayer.Gold);
             AdjustStatDisplay();
         }
         private void AdjustStatDisplay()
@@ -309,10 +309,10 @@ namespace Game.Engine
             {
                 try
                 {
-                    Monster monster = mapMatrix.CreateMonster(playerPosLeft, playerPosTop, currentPlayer.Level);
+                    Monster monster = mapMatrix.CreateMonster(playerPosLeft, playerPosTop, CurrentPlayer.Level);
                     if (monster != null)
                     {
-                        BattleScene newBattleScene = new BattleScene(parentPage, this, currentPlayer, monster);
+                        BattleScene newBattleScene = new BattleScene(parentPage, this, CurrentPlayer, monster);
                         Battle newBattle = new Battle(this, newBattleScene, monster);
                         newBattle.Run();
                         if (newBattle.battleResult)

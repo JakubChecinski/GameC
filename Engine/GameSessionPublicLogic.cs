@@ -231,7 +231,7 @@ namespace Game.Engine
         {
             // player learns a particular skill
             // if you use this method, you should know exactly what skill you want the player to learn
-            currentPlayer.Learn(sk);
+            CurrentPlayer.Learn(sk);
         }
 
         /***************************        FIGHTS      ***************************/
@@ -247,7 +247,7 @@ namespace Game.Engine
                 Monster monster = Index.RandomMonsterFactory().Clone().Create();
                 if (monster != null)
                 {
-                    Display.BattleScene newBattleScene = new Display.BattleScene(parentPage, this, currentPlayer, monster);
+                    Display.BattleScene newBattleScene = new Display.BattleScene(parentPage, this, CurrentPlayer, monster);
                     Battle newBattle = new Battle(this, newBattleScene, monster, false, possibleToEscape);
                     newBattle.Run();
                     if (newBattle.battleResult) UpdateStat(7, monster.XPValue);
@@ -271,7 +271,7 @@ namespace Game.Engine
             // if you want to make it possible to run away, provide the optional second argument and set it to true
             if (monster != null)
             {
-                Display.BattleScene newBattleScene = new Display.BattleScene(parentPage, this, currentPlayer, monster);
+                Display.BattleScene newBattleScene = new Display.BattleScene(parentPage, this, CurrentPlayer, monster);
                 Battle newBattle = new Battle(this, newBattleScene, monster, false, possibleToEscape);
                 newBattle.Run();
                 if (newBattle.battleResult) UpdateStat(7, monster.XPValue);
@@ -322,28 +322,28 @@ namespace Game.Engine
             switch (number)
             {
                 case 1:
-                    currentPlayer.Health += value - currentPlayer.HealthBuff;
+                    CurrentPlayer.Health += value - CurrentPlayer.HealthBuff;
                     break;
                 case 2:
-                    currentPlayer.Strength += value - currentPlayer.StrengthBuff;
+                    CurrentPlayer.Strength += value - CurrentPlayer.StrengthBuff;
                     break;
                 case 3:
-                    currentPlayer.Armor += value - currentPlayer.ArmorBuff;
+                    CurrentPlayer.Armor += value - CurrentPlayer.ArmorBuff;
                     break;
                 case 4:
-                    currentPlayer.Precision += value - currentPlayer.PrecisionBuff;
+                    CurrentPlayer.Precision += value - CurrentPlayer.PrecisionBuff;
                     break;
                 case 5:
-                    currentPlayer.MagicPower += value - currentPlayer.MagicPowerBuff;
+                    CurrentPlayer.MagicPower += value - CurrentPlayer.MagicPowerBuff;
                     break;
                 case 6:
-                    currentPlayer.Stamina += value - currentPlayer.StaminaBuff - currentPlayer.BattleBuffStamina;
+                    CurrentPlayer.Stamina += value - CurrentPlayer.StaminaBuff - CurrentPlayer.BattleBuffStamina;
                     break;
                 case 7:
-                    currentPlayer.XP += value;
+                    CurrentPlayer.XP += value;
                     break;
                 case 8:
-                    currentPlayer.Gold += value;
+                    CurrentPlayer.Gold += value;
                     break;
             }
             RefreshStats();
@@ -357,21 +357,21 @@ namespace Game.Engine
             switch (number)
             {
                 case 1:
-                    return currentPlayer.Health;
+                    return CurrentPlayer.Health;
                 case 2:
-                    return currentPlayer.Strength;
+                    return CurrentPlayer.Strength;
                 case 3:
-                    return currentPlayer.Armor;
+                    return CurrentPlayer.Armor;
                 case 4:
-                    return currentPlayer.Precision;
+                    return CurrentPlayer.Precision;
                 case 5:
-                    return currentPlayer.MagicPower;
+                    return CurrentPlayer.MagicPower;
                 case 6:
-                    return currentPlayer.Stamina;
+                    return CurrentPlayer.Stamina;
                 case 7:
-                    return currentPlayer.Level;
+                    return CurrentPlayer.Level;
                 case 8:
-                    return currentPlayer.Gold;
+                    return CurrentPlayer.Gold;
             }
             return 0;
         }

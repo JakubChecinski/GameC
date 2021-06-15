@@ -51,7 +51,7 @@ namespace Game.Engine
         }
         public static Item RandomClassItem(GameSession parentSession)
         {
-            Player player = parentSession.currentPlayer;
+            Player player = parentSession.CurrentPlayer;
             if (player.ClassName == "Mage") return itemFactories[RNG(0, itemFactories.Count)].CreateNonWeaponItem(parentSession);
             else if (player.ClassName == "Warrior") return itemFactories[RNG(0, itemFactories.Count)].CreateNonMagicItem(parentSession);
             else return itemFactories[RNG(0, itemFactories.Count)].CreateAnyItem(parentSession);

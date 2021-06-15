@@ -40,9 +40,9 @@ namespace Game.Display
         public bool Movable { get; set; }
         public bool ItemSellFlag { get; set; }
         public bool IgnoreNextKey { get; set; }
-        private int prevX { get { return pageData.prevX; } set { pageData.prevX = value; } }
-        private int prevY { get { return pageData.prevY; } set { pageData.prevY = value; } }
-        protected string lastMove { get { return pageData.lastMove; } set { pageData.lastMove = value; } }
+        private int PrevX { get { return pageData.prevX; } set { pageData.prevX = value; } }
+        private int PrevY { get { return pageData.prevY; } set { pageData.prevY = value; } }
+        protected string LastMove { get { return pageData.lastMove; } set { pageData.lastMove = value; } }
         public GamePage(MainWindow frame, string playerChoice)
         {
             InitializeComponent();
@@ -59,7 +59,7 @@ namespace Game.Display
             portalImages = new List<Image>();
             interactionImages = new List<Image>();
             currentSession = new GameSession(this, playerChoice);
-            Player.Source = currentSession.currentPlayer.GetImageSource();
+            Player.Source = currentSession.CurrentPlayer.GetImageSource();
             Grid.SetColumn(Player, currentSession.PlayerPosLeft);
             Grid.SetRow(Player, currentSession.PlayerPosTop);
             // prepare animations
@@ -116,27 +116,27 @@ namespace Game.Display
             switch(direction)
             {
                 case "up":
-                    lastMove = direction;
+                    LastMove = direction;
                     Grid.SetRow(Player, currentSession.PlayerPosTop - 1);
                     currentSession.PlayerPosTop -= 1;
                     break;
                 case "down":
-                    lastMove = direction;
+                    LastMove = direction;
                     Grid.SetRow(Player, currentSession.PlayerPosTop + 1);
                     currentSession.PlayerPosTop += 1;
                     break;
                 case "left":
-                    lastMove = direction;
+                    LastMove = direction;
                     Grid.SetColumn(Player, currentSession.PlayerPosLeft - 1);
                     currentSession.PlayerPosLeft -= 1;
                     break;
                 case "right":
-                    lastMove = direction;
+                    LastMove = direction;
                     Grid.SetColumn(Player, currentSession.PlayerPosLeft + 1);
                     currentSession.PlayerPosLeft += 1;
                     break;
                 case "reverse":
-                    switch (lastMove)
+                    switch (LastMove)
                     {
                         case "up":
                             Grid.SetRow(Player, currentSession.PlayerPosTop + 1);
@@ -313,7 +313,7 @@ namespace Game.Display
         }
         public void AddInteraction(int x, int y, int number)
         {
-            number = number - 3000;
+            number -= 3000;
             try
             {
                 Image img = new Image();
@@ -447,7 +447,7 @@ namespace Game.Display
             if (e.Key == Key.U)
             {
                 AddConsoleText("Obecnie znasz nastepujace umiejetnosci:");
-                foreach(Skill sk in currentSession.currentPlayer.ListOfSkills)
+                foreach(Skill sk in currentSession.CurrentPlayer.ListOfSkills)
                 {
                     AddConsoleText(sk.PublicName);
                 }

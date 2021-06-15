@@ -26,7 +26,7 @@ namespace Game.Engine
         private bool startGame = true; // is the game starting?
         [NonSerialized] private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         [NonSerialized] private System.Windows.Forms.Timer timerPlayer = new System.Windows.Forms.Timer();
-        public Player currentPlayer { get; set; }
+        public Player CurrentPlayer { get; set; }
         public bool[] AvailableMoves; // W,S,A,D
         public string CurrentKey { private get; set; } // currently pressed key
         public Skill CurrentSelection { private get; set; } // currently selected skill during a battle
@@ -86,8 +86,8 @@ namespace Game.Engine
         {
             // core
             this.parentPage = parentPage;
-            currentPlayer = new Mage(this);
-            if (playerChoice != null) { if (playerChoice.Contains("Fizyczna")) currentPlayer = new Warrior(this); }
+            CurrentPlayer = new Mage(this);
+            if (playerChoice != null) { if (playerChoice.Contains("Fizyczna")) CurrentPlayer = new Warrior(this); }
             itemPositions = new List<int>();
             activeItems = new List<Item>();
             parentPage.AddConsoleText("Witaj w grze!");
@@ -106,33 +106,33 @@ namespace Game.Engine
                 if (playerChoice.Contains("topor"))
                 {
                     ProduceItem("item0003");
-                    currentPlayer.Learn(new AxeCut());
-                    currentPlayer.Learn(new SwordSlash());
-                    currentPlayer.Learn(new SpearStab());
+                    CurrentPlayer.Learn(new AxeCut());
+                    CurrentPlayer.Learn(new SwordSlash());
+                    CurrentPlayer.Learn(new SpearStab());
                 }
                 else if (playerChoice.Contains("miecz"))
                 {
                     ProduceItem("item0004");
-                    currentPlayer.Learn(new AxeCut());
-                    currentPlayer.Learn(new SwordSlash());
-                    currentPlayer.Learn(new SpearStab());
+                    CurrentPlayer.Learn(new AxeCut());
+                    CurrentPlayer.Learn(new SwordSlash());
+                    CurrentPlayer.Learn(new SpearStab());
                 }
                 else if (playerChoice.Contains("wlocznia"))
                 {
                     ProduceItem("item0002");
-                    currentPlayer.Learn(new AxeCut());
-                    currentPlayer.Learn(new SwordSlash());
-                    currentPlayer.Learn(new SpearStab());
+                    CurrentPlayer.Learn(new AxeCut());
+                    CurrentPlayer.Learn(new SwordSlash());
+                    CurrentPlayer.Learn(new SpearStab());
                 }
                 else if (playerChoice.Contains("Ognista"))
                 {
                     ProduceItem("item0001");
-                    currentPlayer.Learn(new FireArrow());
+                    CurrentPlayer.Learn(new FireArrow());
                 }
                 else if (playerChoice.Contains("Podmuch"))
                 {
                     ProduceItem("item0001");
-                    currentPlayer.Learn(new WindGust());
+                    CurrentPlayer.Learn(new WindGust());
                 }
             }      
         }

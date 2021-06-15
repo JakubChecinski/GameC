@@ -59,10 +59,10 @@ namespace Game.Engine
                 battleScene.SendColorText("Ostrzezenie - z tego pojedynku nie mozna uciec", "yellow");
                 battleScene.SendBattleText("");
             }
-            battleScene.SetSkills(parentSession.currentPlayer.ListAvailableSkills(possibleToEscape));
+            battleScene.SetSkills(parentSession.CurrentPlayer.ListAvailableSkills(possibleToEscape));
             while (Monster.Health > 0) // reminder: there will be a separate mechanism for what happens when Player.Health == 0 
             {
-                if(parentSession.currentPlayer.ListAvailableSkills(possibleToEscape).Count == 0) // player has run out of stamina
+                if(parentSession.CurrentPlayer.ListAvailableSkills(possibleToEscape).Count == 0) // player has run out of stamina
                 {
                     RestorePlayerState();
                     battleScene.SendColorText("Zadne dalsze ruchy nie sa dostepne - porazka! (Nacisnij dowolny klawisz, aby kontynuowac)", "red");
@@ -92,7 +92,7 @@ namespace Game.Engine
                 SoundEngine.PlaySound(playerResponse.ReqItem.ToString(), SoundType.BattleRequiredItem);
                 firstBlood = true;
                 // calculate damage
-                List<StatPackage> playerAttack = playerResponse.BattleMove(parentSession.currentPlayer, parentSession.GetActiveItemNames());
+                List<StatPackage> playerAttack = playerResponse.BattleMove(parentSession.CurrentPlayer, parentSession.GetActiveItemNames());
                 List<StatPackage> memorizedAttack = new List<StatPackage>();
                 foreach (StatPackage pack in playerAttack) memorizedAttack.Add(pack.Copy());
                 playerAttack = parentSession.ModifyOffensive(playerAttack);
@@ -140,7 +140,7 @@ namespace Game.Engine
                         (memorizedAttack[i].MagicPowerDmg - playerAttack[i].MagicPowerDmg) + " debuffa do mocy magicznej!", "yellow");
                 }
                 parentSession.UpdateStat(6, -1*playerResponse.StaminaCost);
-                battleScene.SetSkills(parentSession.currentPlayer.ListAvailableSkills(possibleToEscape));
+                battleScene.SetSkills(parentSession.CurrentPlayer.ListAvailableSkills(possibleToEscape));
                 battleScene.ResetChoice();
                 // monster attack
                 if (Monster.Health == 0) continue;
@@ -148,7 +148,7 @@ namespace Game.Engine
                 List<StatPackage> monsterAttack = new List<StatPackage>();
                 foreach (StatPackage pack in effectiveAttack) monsterAttack.Add(pack.Copy());
                 effectiveAttack = parentSession.ModifyDefensive(effectiveAttack);
-                effectiveAttack = parentSession.currentPlayer.React(effectiveAttack);
+                effectiveAttack = parentSession.CurrentPlayer.React(effectiveAttack);
                 for (int i = 0; i < monsterAttack.Count && i < effectiveAttack.Count; i++) 
                 {
                     battleScene.SendColorText(monsterAttack[i].CustomText, "red");
@@ -188,33 +188,33 @@ namespace Game.Engine
         protected void CopyPlayerState()
         {
             // not very pretty, but I can't think of another solution that wouldn't make things more complicated
-            hpCopy = parentSession.currentPlayer.Health - parentSession.currentPlayer.HealthBuff;
-            strCopy = parentSession.currentPlayer.Strength - parentSession.currentPlayer.StrengthBuff;
-            armCopy = parentSession.currentPlayer.Armor - parentSession.currentPlayer.ArmorBuff;
-            prCopy = parentSession.currentPlayer.Precision - parentSession.currentPlayer.PrecisionBuff;
-            mgCopy = parentSession.currentPlayer.MagicPower - parentSession.currentPlayer.MagicPowerBuff;
-            staCopy = parentSession.currentPlayer.Stamina - parentSession.currentPlayer.StaminaBuff;
+            hpCopy = parentSession.CurrentPlayer.Health - parentSession.CurrentPlayer.HealthBuff;
+            strCopy = parentSession.CurrentPlayer.Strength - parentSession.CurrentPlayer.StrengthBuff;
+            armCopy = parentSession.CurrentPlayer.Armor - parentSession.CurrentPlayer.ArmorBuff;
+            prCopy = parentSession.CurrentPlayer.Precision - parentSession.CurrentPlayer.PrecisionBuff;
+            mgCopy = parentSession.CurrentPlayer.MagicPower - parentSession.CurrentPlayer.MagicPowerBuff;
+            staCopy = parentSession.CurrentPlayer.Stamina - parentSession.CurrentPlayer.StaminaBuff;
         }
         protected void RestorePlayerState(bool fullHP = true)
         {
             // restore statistics
             if (fullHP)
             {
-                parentSession.currentPlayer.Health = hpCopy;
+                parentSession.CurrentPlayer.Health = hpCopy;
             }
             else
             {
-                parentSession.currentPlayer.Health = (int)((parentSession.currentPlayer.Health + hpCopy) / 2);
-                if (parentSession.currentPlayer.Health > hpCopy) parentSession.currentPlayer.Health = hpCopy;
-                parentSession.currentPlayer.LostHP += hpCopy - parentSession.currentPlayer.Health + parentSession.currentPlayer.BattleBuffHealth;
-                if (parentSession.currentPlayer.LostHP < 0) parentSession.currentPlayer.LostHP = 0; //workaround
+                parentSession.CurrentPlayer.Health = (int)((parentSession.CurrentPlayer.Health + hpCopy) / 2);
+                if (parentSession.CurrentPlayer.Health > hpCopy) parentSession.CurrentPlayer.Health = hpCopy;
+                parentSession.CurrentPlayer.LostHP += hpCopy - parentSession.CurrentPlayer.Health + parentSession.CurrentPlayer.BattleBuffHealth;
+                if (parentSession.CurrentPlayer.LostHP < 0) parentSession.CurrentPlayer.LostHP = 0; //workaround
             }
-            parentSession.currentPlayer.Strength = strCopy;
-            parentSession.currentPlayer.Armor = armCopy;
-            parentSession.currentPlayer.Precision = prCopy;
-            parentSession.currentPlayer.MagicPower = mgCopy;
-            parentSession.currentPlayer.Stamina = staCopy;
-            parentSession.currentPlayer.ResetBattleBuffs();
+            parentSession.CurrentPlayer.Strength = strCopy;
+            parentSession.CurrentPlayer.Armor = armCopy;
+            parentSession.CurrentPlayer.Precision = prCopy;
+            parentSession.CurrentPlayer.MagicPower = mgCopy;
+            parentSession.CurrentPlayer.Stamina = staCopy;
+            parentSession.CurrentPlayer.ResetBattleBuffs();
             parentSession.RefreshStats();
         }
 
@@ -231,7 +231,7 @@ namespace Game.Engine
             {
                 int gold = 5 * (RNG.Next(9) + 1); ;
                 parentSession.SendText("Wyglada na to, ze potwor strzegl torby ze zlotem (+" + gold + " sztuk zlota).");
-                parentSession.currentPlayer.Gold += gold;
+                parentSession.CurrentPlayer.Gold += gold;
             }
         }
 

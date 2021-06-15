@@ -39,8 +39,6 @@ namespace Game.Sound
         internal static List<Sound> CreateLibrary()
         {
             List<Sound> soundLibrary = new List<Sound>();
-            string monster = string.Empty;
-            string item = string.Empty;
 
             // Add here list of sounds by pattern
             // soundLibrary.Add(new Sound(null, NAME, "FILE_NAME.mp3", SoundContext, SoundType, Resource1.RESOURCE_NAME));
@@ -56,7 +54,7 @@ namespace Game.Sound
             soundLibrary.Add(new Sound(null, SoundNames.MOUSE_CLICK_GAME_2, string.Concat(SoundNames.MOUSE_CLICK_GAME_2, ".mp3"), SoundContext.GamePage, SoundType.MouseSound, Resource1.mouse_click));
 
             // ITEMS
-            item = Engine.RequiredItem.Axe.ToString();
+            string item = Engine.RequiredItem.Axe.ToString();
             soundLibrary.Add(new Sound(null, item, string.Concat(item, "_item.mp3"), SoundContext.Battle, SoundType.BattleRequiredItem, Resource1.item_axe));
             item = Engine.RequiredItem.Spear.ToString();
             soundLibrary.Add(new Sound(null, item, string.Concat(item, "_item.mp3"), SoundContext.Battle, SoundType.BattleRequiredItem, Resource1.item_spear));

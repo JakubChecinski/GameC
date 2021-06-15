@@ -17,8 +17,8 @@ namespace Game.Display
             {
                 soundEngine.PlaySound(Sound.SoundNames.MOUSE_CLICK_GAME_1);
                 mousePosition = e.GetPosition(ItemCanvas);
-                prevX = MyGridPositionX(mousePosition);
-                prevY = MyGridPositionY(mousePosition);
+                PrevX = MyGridPositionX(mousePosition);
+                PrevY = MyGridPositionY(mousePosition);
                 draggedImage = image;
                 ItemGrid.Children.Remove(draggedImage);
                 draggedImage.Height = ItemGrid.ActualHeight / 6.0; // convenience rescaling (6 rows in the grid)
@@ -42,17 +42,17 @@ namespace Game.Display
                     int gridPosY = (int)(6.0 * mousePosition.Y / ItemCanvas.ActualHeight);
                     if (gridPosX < 0 || gridPosX > 4 || gridPosY < 0 || gridPosY > 5)
                     {
-                        currentSession.RemoveItemPosition(prevX, prevY);
+                        currentSession.RemoveItemPosition(PrevX, PrevY);
                         // sell an item (it's just those two lines of game logic so I put them here)
-                        currentSession.currentPlayer.Gold += Index.ProduceSpecificItem(draggedImage.Name).GoldValue;
+                        currentSession.CurrentPlayer.Gold += Index.ProduceSpecificItem(draggedImage.Name).GoldValue;
                         currentSession.RefreshStats();
                         draggedImage = null;
                     }
                     else
                     {
                         ItemGrid.Children.Add(draggedImage);
-                        Grid.SetRow(draggedImage, prevY);
-                        Grid.SetColumn(draggedImage, prevX);
+                        Grid.SetRow(draggedImage, PrevY);
+                        Grid.SetColumn(draggedImage, PrevX);
                         draggedImage = null;
                     }
                 }
@@ -65,12 +65,12 @@ namespace Game.Display
                     Image oldImage = GetImageFromGrid(MyGridPositionX(mousePosition), MyGridPositionY(mousePosition), true);
                     if (oldImage != null)
                     {
-                        Grid.SetRow(oldImage, prevY);
-                        Grid.SetColumn(oldImage, prevX);
+                        Grid.SetRow(oldImage, PrevY);
+                        Grid.SetColumn(oldImage, PrevX);
                     }
                     //
                     draggedImage = null;
-                    currentSession.RemoveItemPosition(prevX, prevY);
+                    currentSession.RemoveItemPosition(PrevX, PrevY);
                     currentSession.AddItemPosition(MyGridPositionX(mousePosition), MyGridPositionY(mousePosition));
                 }
             }

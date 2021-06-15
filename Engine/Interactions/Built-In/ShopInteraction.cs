@@ -69,7 +69,7 @@ namespace Game.Engine.Interactions
                     break;
             }
             if (it == null) return;
-            if (parentSession.currentPlayer.Gold >= it.GoldValue + 20)
+            if (parentSession.CurrentPlayer.Gold >= it.GoldValue + 20)
             {
                 parentSession.AddThisItem(it);
                 parentSession.UpdateStat(8, -1 * it.GoldValue - 20);

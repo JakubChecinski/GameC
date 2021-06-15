@@ -21,7 +21,7 @@ namespace Game.Engine.Interactions
 
         protected override void RunContent()
         {
-            int hpToHeal = parentSession.currentPlayer.LostHP;
+            int hpToHeal = parentSession.CurrentPlayer.LostHP;
             if(hpToHeal == 0)
             {
                 parentSession.SendText("\nWitaj. Jestem lekarzem zajmujacym sie chorymi i rannymi... ty chyba jednak nie potrzebujesz teraz mojej pomocy.");
@@ -37,7 +37,7 @@ namespace Game.Engine.Interactions
                 {
                     parentSession.UpdateStat(1, hpToHeal);
                     parentSession.UpdateStat(8, -2 * hpToHeal);
-                    parentSession.currentPlayer.LostHP = 0;
+                    parentSession.CurrentPlayer.LostHP = 0;
                     parentSession.SendText("Juz po wszystkim! Uwazaj na siebie nastepnym razem.");
                 }
                 else parentSession.SendText("Wybacz, ale nie masz wystarczajaco duzo zlota. Rozumiesz chyba, gildia lekarzy nie pozwala mi pracowac za darmo.");

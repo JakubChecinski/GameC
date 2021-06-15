@@ -88,6 +88,7 @@
     <Compile Include="Engine\Skills\BasicSpells\DeepBreath.cs" />
     <Compile Include="Engine\Skills\Misc\RunAway.cs" />
     <Compile Include="Engine\Skills\Spell.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

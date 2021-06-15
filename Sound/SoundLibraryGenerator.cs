@@ -46,6 +46,9 @@ namespace Game.Sound
             // soundLibrary.Add(new Sound(null, NAME, "FILE_NAME.mp3", SoundContext, SoundType, Resource1.RESOURCE_NAME));
             // mp3 files have to be added to Sound/Assets, then ALSO dragged from there to Resources window
 
+            // BACKGROUND
+            //soundLibrary.Add(new Sound(null, SoundNames.BACKGROUND_MUSIC_GAME, "background_game.mp3", SoundContext.GamePage, SoundType.Background, Resource1.background_game));
+
             // MOUSE
             soundLibrary.Add(new Sound(null, SoundNames.MOUSE_CLICK_MENU, string.Concat(SoundNames.MOUSE_CLICK_MENU, ".mp3"), SoundContext.MenuPage, SoundType.MouseSound, Resource1.mouse_click));
             soundLibrary.Add(new Sound(null, SoundNames.MOUSE_HOVER_MENU, string.Concat(SoundNames.MOUSE_HOVER_MENU, ".mp3"), SoundContext.MenuPage, SoundType.MouseSound, Resource1.mouse_hover));

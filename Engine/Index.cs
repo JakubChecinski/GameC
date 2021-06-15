@@ -14,7 +14,7 @@ namespace Game.Engine
     // contains information about skills, items and monsters that will be available in the game
     public static partial class Index
     {
-        private static List<SkillFactory> skillFactories = new List<SkillFactory>()
+        private readonly static List<SkillFactory> skillFactories = new List<SkillFactory>()
         {
             new BasicSpellFactory(),
         };
@@ -33,7 +33,7 @@ namespace Game.Engine
             new GymirAxe(),
         };
 
-        private static List<ItemFactory> itemFactories = new List<ItemFactory>()
+        private readonly static List<ItemFactory> itemFactories = new List<ItemFactory>()
         {
             new BasicArmorFactory(),
         };

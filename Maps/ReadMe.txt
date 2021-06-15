@@ -1,5 +1,5 @@
-W folderze bin/debug/maps znajduje się plik o nazwie "MetaMap.txt".
-Plik ten pozwala na tworzenie map z włąsnymi połaczeniami, potworami i interakcjami.
+W folderze Maps znajduje się plik o nazwie "MetaMap.txt".
+Plik ten pozwala na tworzenie map z własnymi połączeniami, potworami i interakcjami.
 Nazwy tego pliku nie należy zmieniać pod żadnym pozorem.
 Każda linijka poza pierwszą w tym pliku odpowiada kolejnej mapie, któa pojawi się w grze.
 

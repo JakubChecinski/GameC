@@ -59,6 +59,7 @@ namespace Game.Display
             portalImages = new List<Image>();
             interactionImages = new List<Image>();
             currentSession = new GameSession(this, playerChoice);
+            Player.Source = currentSession.currentPlayer.GetImageSource();
             Grid.SetColumn(Player, currentSession.PlayerPosLeft);
             Grid.SetRow(Player, currentSession.PlayerPosTop);
             // prepare animations

@@ -20,6 +20,7 @@ namespace Game.Engine.CharacterClasses
             Stamina = 100;
             Level = 1;
             Gold = 0;
+            Name = "playerMage";
         }
 
         protected override void LevelUp()

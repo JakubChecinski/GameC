@@ -308,6 +308,8 @@
     <Resource Include="Display\Assets\Interactions\interaction0005.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Display\Assets\playerMage.png" />
+    <Resource Include="Display\Assets\playerWarrior.png" />
     <Content Include="Sound\Assets\player_death.mp3" />
     <Content Include="Sound\Assets\rat_death.mp3" />
     <Content Include="Sound\Assets\rat_init.mp3" />

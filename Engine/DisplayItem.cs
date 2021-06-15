@@ -21,6 +21,10 @@ namespace Game.Engine
             img.Name = Name;
             return img;
         }
+        public virtual BitmapImage GetImageSource()
+        {
+            return new BitmapImage(new Uri(("Assets/" + Name + ".png"), UriKind.Relative));
+        }
 
     }
 }

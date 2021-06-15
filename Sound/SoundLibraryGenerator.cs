@@ -65,25 +65,42 @@ namespace Game.Sound
             item = Engine.RequiredItem.Sword.ToString();
             soundLibrary.Add(new Sound(null, item, string.Concat(item, "_item.mp3"), SoundContext.Battle, SoundType.BattleRequiredItem, Resource1.item_sword));
 
-            // PLAYER (not used, example for future reference)
-            // soundLibrary.Add(new Sound(null, SoundNames.PLAYER_DEATH, "PlayerDeath.mp3", SoundContext.Battle, SoundType.Player, Resource1.player_death));
+            // PLAYER 
+            soundLibrary.Add(new Sound(null, SoundNames.PLAYER_DEATH, "player_death.mp3", SoundContext.Battle, SoundType.Player, Resource1.player_death));
             // soundLibrary.Add(new Sound(null, SoundNames.PLAYER_WIN, "PlayerWin.mp3", SoundContext.Battle, SoundType.Player, Resource1.player_win));
 
-            // MONSTER (not used, example for future reference)
-            /*
-            // Cats / Black Cat
-            monsters.Add("monster1163");
-            // Cats / Cat Wizard
-            monsters.Add("monster1164");
+            // MONSTER
+            List<string> monsters = new List<string>();
+            // Rat / Evolved Rat
+            monsters.Add("monster0001");
+            monsters.Add("monster0002");
             foreach (var m in monsters)
             {
-                soundLibrary.Add(new Sound(null, m, "cat_init.mp3", SoundContext.Battle, SoundType.MonsterInit, Resource1.cat_init));
-                soundLibrary.Add(new Sound(null, m, "cat_bite.mp3", SoundContext.Battle, SoundType.MonsterBite, Resource1.cat_bite));
-                soundLibrary.Add(new Sound(null, m, "cat_win.mp3", SoundContext.Battle, SoundType.MonsterWin, Resource1.cat_win));
-                soundLibrary.Add(new Sound(null, m, "cat_death.mp3", SoundContext.Battle, SoundType.MonsterDeath, Resource1.cat_death));
+                soundLibrary.Add(new Sound(null, m, "rat_init.mp3", SoundContext.Battle, SoundType.MonsterInit, Resource1.rat_init));
+                soundLibrary.Add(new Sound(null, m, "rat_death.mp3", SoundContext.Battle, SoundType.MonsterDeath, Resource1.rat_death));
             }
             monsters.Clear();
-            */
+            // Spider / Tarantula
+            monsters.Add("monster0003");
+            monsters.Add("monster0004");
+            foreach (var m in monsters)
+            {
+                soundLibrary.Add(new Sound(null, m, "spider_init.mp3", SoundContext.Battle, SoundType.MonsterInit, Resource1.spider_init));
+                soundLibrary.Add(new Sound(null, m, "spider_death.mp3", SoundContext.Battle, SoundType.MonsterDeath, Resource1.spider_death));
+            }
+            monsters.Clear();
+            // Vampire Knight
+            soundLibrary.Add(new Sound(null, "monster0006", "vampire_knight_init.mp3", SoundContext.Battle, SoundType.MonsterInit, Resource1.vampire_knight_init));
+            soundLibrary.Add(new Sound(null, "monster0006", "vampire_knight_death.mp3", SoundContext.Battle, SoundType.MonsterDeath, Resource1.vampire_knight_death));
+
+            // Bat
+            soundLibrary.Add(new Sound(null, "monster0005", "bat_init.mp3", SoundContext.Battle, SoundType.MonsterInit, Resource1.bat_init));
+            soundLibrary.Add(new Sound(null, "monster0005", "bat_death.mp3", SoundContext.Battle, SoundType.MonsterDeath, Resource1.bat_death));
+
+            // BACKGROUND MUSIC
+            // Battle Music
+            soundLibrary.Add(new Sound(null, SoundNames.BACKGROUND_MUSIC_BATTLE, "backround_music_cld.mp3", SoundContext.Battle, SoundType.Background, Resource1.background_music_cld));
+
 
             return soundLibrary;
         }

@@ -63,6 +63,36 @@ namespace Game {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] background_music_cld {
+            get {
+                object obj = ResourceManager.GetObject("background_music_cld", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bat_death {
+            get {
+                object obj = ResourceManager.GetObject("bat_death", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bat_init {
+            get {
+                object obj = ResourceManager.GetObject("bat_init", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] item_axe {
             get {
                 object obj = ResourceManager.GetObject("item_axe", resourceCulture);
@@ -146,6 +176,76 @@ namespace Game {
         internal static byte[] mouse_hover {
             get {
                 object obj = ResourceManager.GetObject("mouse_hover", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] player_death {
+            get {
+                object obj = ResourceManager.GetObject("player_death", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] rat_death {
+            get {
+                object obj = ResourceManager.GetObject("rat_death", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] rat_init {
+            get {
+                object obj = ResourceManager.GetObject("rat_init", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] spider_death {
+            get {
+                object obj = ResourceManager.GetObject("spider_death", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] spider_init {
+            get {
+                object obj = ResourceManager.GetObject("spider_init", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] vampire_knight_death {
+            get {
+                object obj = ResourceManager.GetObject("vampire_knight_death", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] vampire_knight_init {
+            get {
+                object obj = ResourceManager.GetObject("vampire_knight_init", resourceCulture);
                 return ((byte[])(obj));
             }
         }

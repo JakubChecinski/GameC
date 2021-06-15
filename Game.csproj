@@ -308,8 +308,18 @@
     <Resource Include="Display\Assets\Interactions\interaction0005.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Sound\Assets\player_death.mp3" />
+    <Content Include="Sound\Assets\rat_death.mp3" />
+    <Content Include="Sound\Assets\rat_init.mp3" />
+    <Content Include="Sound\Assets\spider_death.mp3" />
+    <Content Include="Sound\Assets\spider_init.mp3" />
+    <Content Include="Sound\Assets\vampire_knight_death.mp3" />
+    <Content Include="Sound\Assets\vampire_knight_init.mp3" />
     <Resource Include="Maps\MetaMap.txt" />
     <Resource Include="Maps\MyMap.txt" />
+    <Content Include="Sound\Assets\background_music_cld.mp3" />
+    <Content Include="Sound\Assets\bat_death.mp3" />
+    <Content Include="Sound\Assets\bat_init.mp3" />
     <Content Include="Sound\Assets\item_axe.mp3" />
     <Content Include="Sound\Assets\item_spear.mp3" />
     <Content Include="Sound\Assets\item_staff.mp3" />

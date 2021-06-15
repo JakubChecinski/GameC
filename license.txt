@@ -1,5 +1,5 @@
 Copyright (c) 2020 Jakub Chęciński (checinski.j@gmail.com), Maciej Talar, 
-Maksymilian Krajcarz, Jakub Bociek 
+Maksymilian Krajcarz, Jakub Bociek, Vladyslav Khmara
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

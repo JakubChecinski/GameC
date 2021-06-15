@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="background_music_cld" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\background_music_cld.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bat_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\bat_death.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bat_init" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\bat_init.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="item_axe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sound\assets\item_axe.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -144,5 +153,26 @@
   </data>
   <data name="mouse_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sound\assets\mouse_hover.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="player_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\player_death.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rat_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\rat_death.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rat_init" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\rat_init.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="spider_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\spider_death.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="spider_init" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\spider_init.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="vampire_knight_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\vampire_knight_death.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="vampire_knight_init" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sound\assets\vampire_knight_init.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
